@@ -1,0 +1,47 @@
+#ifndef NPC_H
+#define NPC_H
+
+#include "raylib.h"
+#include "hash.h"
+
+typedef enum{
+    NPC_TYPE_VILLAGER, 
+    NPC_TYPE_COW
+} NPCType;
+
+struct NPC{
+    entity e;
+    NPCType type; 
+    int state; // 0 is idle // 1 is wander 
+    int currentFrame; 
+    float animTimer; 
+
+    // Added fields:
+    Vector2 vel;        // per-frame delta applied to entity via update()
+    float stateTimer;   // time left in current idle/wait state (seconds)
+    float moveTimer;    // time left while wandering (seconds)
+    float speed;        // movement speed (per-frame units)
+
+    // Facing for sprite flip: 1 = right, -1 = left
+    int facingRight;
+
+    // Smooth turning helpers
+    float facingTimer;   // accumulated time wanting to flip
+    float facingDelay;   // required time before flip (seconds)
+    float lastVelX;      // previous frame horizontal velocity
+};
+typedef struct NPC *NPC;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern NPC npcCreate(int x, int y, int width, int height);
+// Updated signature: pass map so movement uses collision
+extern void npcUpdate(NPC npc, hash map);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // NPC_H
