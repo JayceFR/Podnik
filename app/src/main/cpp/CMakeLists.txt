@@ -15,21 +15,22 @@ add_subdirectory(external/raylib raylib_build)
 # Using relative paths for better maintainability
 set(GAME_SOURCES
     game/main.cpp
-    game/game_loop.c
-    game/camera.c
-    game/coin.c
-    game/dynarray.c
-    game/enemy.c
-    game/hash.c
-    game/impact.c
-    game/map.c
-    game/minheap.c
-    game/noise.c
-    game/npc.c
-    game/physics.c
-    game/projectile.c
-    game/trial.c
-    game/utils.c
+    game/survival/game_loop.c
+    game/survival/camera.c
+    game/survival/coin.c
+    game/survival/dynarray.c
+    game/survival/enemy.c
+    game/survival/hash.c
+    game/survival/impact.c
+    game/survival/map.c
+    game/survival/minheap.c
+    game/survival/noise.c
+    game/survival/npc.c
+    game/survival/physics.c
+    game/survival/projectile.c
+    game/survival/trial.c
+    game/survival/utils.c
+    game/heist/Heist.cpp
 )
 
 # Required Android glue for native activity
@@ -44,6 +45,8 @@ add_library(podnik SHARED
 # 5. Include directories
 target_include_directories(podnik PRIVATE
     game
+    game/survival
+    game/heist
     external/raylib/src
     "${ANDROID_NDK}/sources/android/native_app_glue"
 )

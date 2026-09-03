@@ -1213,6 +1213,8 @@ static inline float clampf(float v, float lo, float hi) {
 }
 
 
+
+
 int GameMain() {
     InitWindow(SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, "Vampy Reloaded (x2 scaled)");
     InitAudioDevice();
